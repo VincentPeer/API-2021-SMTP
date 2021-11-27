@@ -10,8 +10,8 @@ public class SmtpClient {
     String portServeur;
     static final Logger LOG = Logger.getLogger(SmtpClient.class.getName());
 
-    SmtpClient(String hostname, String port) {
-        addServeur = hostname;
+    SmtpClient(String add, String port) {
+        addServeur = add;
         portServeur = port;
     }
 
@@ -20,22 +20,26 @@ public class SmtpClient {
         Socket clientSocket = null;
         BufferedWriter out = null;
         BufferedReader in = null;
-
+ //https://youtu.be/OrSdRCt_6YQ?list=PLfKkysTy70QY_C0t9avTuEsLVVObxOtTM&t=956
         try {
             clientSocket = new Socket(addServeur, Integer.parseInt(portServeur));
-            out = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
-            in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            out = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream(), "UTF-8"));
+            in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream(), "UTF-8"));
 
             in.readLine(); // Lit le message de bienvenue du serveur
 
-            out.write(malformedHttpRequest);
+            out.write("EHLO MockMock");
             out.flush();
 
             LOG.log(Level.INFO, "*** Response sent by the server: ***");
-            String line;
-            while ((line = in.readLine()) != null) {
+            String line = in.readLine();
+            while ((line.startsWith("250-"))) {
                 LOG.log(Level.INFO, line);
             }
+
+            out.write("MAIL FROM:");
+            // out.write();
+
         } catch (IOException ex) {
             LOG.log(Level.SEVERE, ex.toString(), ex);
         } finally {
