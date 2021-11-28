@@ -1,4 +1,4 @@
-package ch.heigvd.api.labosmtp;
+package ch.heigvd.api.smtp;
 
 import java.io.*;
 import java.net.Socket;

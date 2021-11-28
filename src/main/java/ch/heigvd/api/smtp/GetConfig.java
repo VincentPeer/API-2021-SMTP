@@ -1,9 +1,9 @@
-package ch.heigvd.api.labosmtp;
+package ch.heigvd.api.smtp;
 
 import java.io.*;
 import java.util.Random;
 
-public class GetMessage {
+public class GetConfig {
     Random rand = new Random();
 
 
@@ -24,5 +24,7 @@ public class GetMessage {
 
         return message;
     }
+
+
 
 }
