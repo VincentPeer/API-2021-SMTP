@@ -10,7 +10,7 @@ public class SmtpClient {
     String portServeur;
     static final Logger LOG = Logger.getLogger(SmtpClient.class.getName());
 
-    SmtpClient(String add, String port) {
+    public SmtpClient(String add, String port) {
         addServeur = add;
         portServeur = port;
     }
@@ -20,7 +20,7 @@ public class SmtpClient {
         Socket clientSocket = null;
         BufferedWriter out = null;
         BufferedReader in = null;
- //https://youtu.be/OrSdRCt_6YQ?list=PLfKkysTy70QY_C0t9avTuEsLVVObxOtTM&t=956
+
         try {
             clientSocket = new Socket(addServeur, Integer.parseInt(portServeur));
             out = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream(), "UTF-8"));
