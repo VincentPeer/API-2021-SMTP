@@ -5,10 +5,15 @@ import java.util.List;
 
 public class Mail {
     private Person sender;
-    private List<Person> receivers = new ArrayList<Person>();
-    private List<Person> cc = new ArrayList<Person>();
+    private List<Person> receivers;
+    private List<Person> cc;
     private String subject;
     private String text;
+
+    public Mail() {
+        receivers = new ArrayList<Person>();
+        cc = new ArrayList<Person>();
+    }
 
     public Person getSender() {
         return sender;
@@ -29,7 +34,5 @@ public class Mail {
     public void setText(String text) {
         this.text = text;
     }
-
-//    public Mail()
 
 }

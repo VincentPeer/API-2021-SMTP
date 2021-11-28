@@ -3,50 +3,49 @@ package ch.heigvd.api.model.prank;
 import ch.heigvd.api.model.mail.*;
 import java.io.BufferedReader;
 import java.io.*;
-import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Prank {
-    Mail mail = new Mail(); // todo private?
-    Group victimsList = new Group();
-    Group victims = new Group();
+    Group peopleList; // todo private?
+    List<Group> groups;
+    List<Mail> mails;
 
-    public void readEmails(InputStream is) throws IOException {
+    public void initEmails(InputStream is) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+
         String email;
-
         while((email = br.readLine())  != null) {
-            victimsList.addPerson(new Person(email));
+            peopleList.addPerson(new Person(email));
         }
-
     }
 
-    public void makeGroup() throws IOException {
-        if(victimsList.getVictims().size() < 3) {
-            System.out.println("Pas assez d'adresse mail pour autant de groupe");
-            return;
+    public void makeGroup(int nbGroup, InputStream is) throws IOException {
+        groups = new ArrayList<Group>(nbGroup);
+        initEmails(is);
+
+        // Rempli les groupes
+        while(peopleList.size() > 0) {
+            for(int j = 0; j < nbGroup; ++j) {
+                if(peopleList.size() > 0)
+                    groups.get(j).addPerson(peopleList.pop());
+            }
         }
+    }
 
-        // Choisi aléatoirement un expéditeur dans la liste
-        Random rand = new Random();
-        int indexSender = rand.nextInt(victimsList.getVictims().size());
-        mail.setSender(victimsList.getVictims().get(indexSender));
+    public void makeMails() {
+        mails = new ArrayList<>(groups.size());
 
-        // Extrait l'expéditeur de la liste des victimes pour ne laisser plus que les récépteurs
-        victims = victimsList;
-        victims.extractPerson(indexSender);
-        mail.setReceiver(victims.getVictims());
-
-        InputStream is = new FileInputStream("config/messages");
-        mail.setText(getMessage(is, 5));
-
-
+        for(int i = 0; i < groups.size(); ++i) {
+            // Prend la première personne de chaque groupe comme expéditeur
+            mails.get(i).setSender(groups.get(i).getPeople().get(0));
+            // Les autres personnes du groupe seront les récéptionnistes
+            mails.get(i).setReceiver(groups.get(i).getPeople().subList(1, groups.get(i).size()));
+        }
     }
 
     public String getMessage(InputStream is, int nbMessage) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
-        Random rand = new Random();
-        int messageNb = rand.nextInt(nbMessage) + 1;
-
         int b = br.read();
         while(b != (messageNb + 48)) {
             b = br.read();

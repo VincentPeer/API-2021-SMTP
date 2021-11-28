@@ -1,4 +1,5 @@
 package ch.heigvd.api.smtp;
 
-public class ISmtpClient {
+public interface ISmtpClient {
+    public void conect();
 }

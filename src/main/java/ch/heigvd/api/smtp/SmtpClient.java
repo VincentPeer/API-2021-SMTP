@@ -5,7 +5,7 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class SmtpClient {
+public class SmtpClient implements ISmtpClient {
     String addServeur;
     String portServeur;
     static final Logger LOG = Logger.getLogger(SmtpClient.class.getName());
