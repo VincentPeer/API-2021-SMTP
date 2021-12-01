@@ -7,11 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Prank {
-    Group peopleList; // todo private?
+    Group peopleList;
     List<Group> groups;
-    List<Mail> mails;
+    public List<Mail> mails;
+    List<String> messages;
 
-    public void initEmails(InputStream is) throws IOException {
+    private void initPeopleList(InputStream is) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
 
         String email;
@@ -20,9 +21,9 @@ public class Prank {
         }
     }
 
-    public void makeGroup(int nbGroup, InputStream is) throws IOException {
+    public void makeGroups(int nbGroup, InputStream is) throws IOException {
         groups = new ArrayList<Group>(nbGroup);
-        initEmails(is);
+        initPeopleList(is);
 
         // Rempli les groupes
         while(peopleList.size() > 0) {
@@ -33,31 +34,35 @@ public class Prank {
         }
     }
 
-    public void makeMails() {
+    public void makeMails(InputStream mess) throws IOException {
+        readMessage(mess);
         mails = new ArrayList<>(groups.size());
 
         for(int i = 0; i < groups.size(); ++i) {
             // Prend la première personne de chaque groupe comme expéditeur
             mails.get(i).setSender(groups.get(i).getPeople().get(0));
+
             // Les autres personnes du groupe seront les récéptionnistes
             mails.get(i).setReceiver(groups.get(i).getPeople().subList(1, groups.get(i).size()));
+
+            // Pour chaque groupe, un message est attribué
+            mails.get(i).setText(messages.get(i));
         }
     }
 
-    public String getMessage(InputStream is, int nbMessage) throws IOException {
+    private void readMessage(InputStream is) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
-        int b = br.read();
-        while(b != (messageNb + 48)) {
-            b = br.read();
-        }
 
         StringBuilder message = new StringBuilder();
-        message.append(br.readLine());
-        while(!message.toString().endsWith(".")) {
-            message.append(br.readLine());
+        String line = "";
+        line = br.readLine();
+        while(line != null) {
+            while (!line.equals("END_OF_MESSAGE")) {
+                message.append(line);
+                line = br.readLine();
+            }
+            messages.add(message.toString());
+            line = br.readLine();
         }
-
-        return message.toString();
     }
-
 }

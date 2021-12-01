@@ -14,7 +14,7 @@ public class Main {
     public static void main(String ... args) {
 
         final String ADDRESSE = "localhost";
-        final String PORT = "8282";
+        final String PORT = "25";
 
 
         SmtpClient client = new SmtpClient(ADDRESSE, PORT);

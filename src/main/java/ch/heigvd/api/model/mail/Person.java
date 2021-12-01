@@ -1,7 +1,7 @@
 package ch.heigvd.api.model.mail;
 
 public class Person {
-    private final String email;
+    private String email;
 
     public Person(String email) {
         this.email = email;

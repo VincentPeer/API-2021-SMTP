@@ -35,4 +35,6 @@ public class Mail {
         this.text = text;
     }
 
+    public String getText() { return text; }
+
 }
