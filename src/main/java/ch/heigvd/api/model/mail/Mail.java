@@ -23,7 +23,7 @@ public class Mail {
         this.sender = sender;
     }
 
-    public List<Person> getReceiver() {
+    public List<Person> getReceivers() {
         return receivers;
     }
 

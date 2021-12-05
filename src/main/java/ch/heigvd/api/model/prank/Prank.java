@@ -2,11 +2,13 @@ package ch.heigvd.api.model.prank;
 
 import ch.heigvd.api.model.mail.Group;
 import ch.heigvd.api.model.mail.Mail;
+import ch.heigvd.api.smtp.SmtpClient;
 
 import java.io.*;
 import java.util.List;
 
 public class Prank {
+    SmtpClient client;
     PrankGenerator prank = new PrankGenerator();
     PrankConfig prankConfig;
 
@@ -14,19 +16,14 @@ public class Prank {
         this.prankConfig = prankConfig;
     }
 
-    public Prank() {}
-
-    public List<Mail> getMails() {
-        return prank.mails;
-    }
-
-    public List<Group> getGroups() {
-        return prank.groups;
-    }
-
     public void makePrank() throws IOException {
         prank.makeGroups(prankConfig.getNbGroupe(), new FileInputStream(prankConfig.getVictimsFilename()));
         prank.makeMails(new FileInputStream(prankConfig.getMessageFilename()));
+
+        for(int i = 0 ; i < prankConfig.getNbGroupe(); ++i) {
+            client  = new SmtpClient("localhost", "25");
+            client.sendMail(prank.getMails().get(i));
+        }
     }
 
 }

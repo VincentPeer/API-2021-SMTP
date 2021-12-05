@@ -2,17 +2,17 @@ package ch.heigvd.api.model.prank;
 
 public class PrankConfig {
 
-    private int NB_GROUPE = 3;
-    private String FILE_VICTIMS_PATH =  "config/victims";
-    private String FILE_MESSGAGE_PATH =  "config/messages";
+    private int NB_GROUPE;
+    private String FILE_VICTIMS_PATH;
+    private String FILE_MESSGAGES_PATH;
 
-    public PrankConfig() {}
     public PrankConfig(int n, String victimsFilname, String messageFilename) {
         NB_GROUPE = n;
         FILE_VICTIMS_PATH = victimsFilname;
-        FILE_MESSGAGE_PATH = messageFilename;
+        FILE_MESSGAGES_PATH = messageFilename;
     }
 
+    // todo setter utile?
     public void setNbGroupe(int n) {
         NB_GROUPE = n;
     }
@@ -22,7 +22,7 @@ public class PrankConfig {
     }
 
     public void setMessageFilename(String filename) {
-        FILE_MESSGAGE_PATH = filename;
+        FILE_MESSGAGES_PATH = filename;
     }
 
     public int getNbGroupe() {
@@ -34,7 +34,7 @@ public class PrankConfig {
     }
 
     public String getMessageFilename() {
-    return FILE_MESSGAGE_PATH;
+    return FILE_MESSGAGES_PATH;
     }
 
 

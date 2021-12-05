@@ -12,33 +12,43 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PrankGenerator {
-    Group peopleList;
-    public List<Group> groups;
-    public List<Mail> mails;
-    List<String> messages;
+    private Group victimsList = new Group();;
+    private List<Group> groups;
+    private List<Mail> mails;
+    private List<String> messages = new ArrayList<>();
 
+    public List<Mail> getMails () { return mails; }
+    public List<Group> getGroups() {
+        return groups;
+    }
 
-    public void makeGroups(int nbGroup, InputStream is) throws IOException {
-        groups = new ArrayList<Group>(nbGroup);
-        BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+    public void makeGroups(int nbGroup, InputStream victimsStream) throws IOException {
+        groups = new ArrayList<>(nbGroup);
+        BufferedReader br = new BufferedReader(new InputStreamReader(victimsStream, "UTF-8"));
 
+        // Crée la liste des victimes à partir des emails donnés
         String email;
         while((email = br.readLine())  != null) {
-            peopleList.addPerson(new Person(email));
+            Person p = new Person(email);
+            victimsList.addPerson(p);
         }
+        for(int j = 0; j < nbGroup; ++j)
+            groups.add(new Group());
 
         // Rempli les groupes
-        while(peopleList.size() > 0) {
+        while(!victimsList.isEmpty()) { // todo le dernier groupe aura une taille spéciale + gérer nb personne dans  la liste (min 3 par groupe)
             for(int j = 0; j < nbGroup; ++j) {
-                if(peopleList.size() > 0)
-                    groups.get(j).addPerson(peopleList.pop());
+                if(!victimsList.isEmpty()) // todo 2x la meme condition...
+                    groups.get(j).addPerson(victimsList.pop());
             }
         }
     }
 
-    public void makeMails(InputStream mess) throws IOException {
-        readMessage(mess);
+    public void makeMails(InputStream mess) throws IOException { // todo les check si assez de message etc
+        readMessages(mess);
         mails = new ArrayList<>(groups.size());
+        for(int j = 0; j < groups.size(); ++j)
+            mails.add(new Mail());
 
         for(int i = 0; i < groups.size(); ++i) {
             // Prend la première personne de chaque groupe comme expéditeur
@@ -52,19 +62,17 @@ public class PrankGenerator {
         }
     }
 
-    private void readMessage(InputStream is) throws IOException {
+    private void readMessages(InputStream is) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
 
         StringBuilder message = new StringBuilder();
         String line = "";
-        line = br.readLine();
-        while(line != null) {
+        while((line = br.readLine()) != null) {
             while (!line.equals("END_OF_MESSAGE")) {
                 message.append(line);
                 line = br.readLine();
             }
             messages.add(message.toString());
-            line = br.readLine();
         }
     }
 }

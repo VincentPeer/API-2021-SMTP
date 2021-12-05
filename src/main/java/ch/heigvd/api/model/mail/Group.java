@@ -13,6 +13,7 @@ public class Group {
     public int size() {
         return people.size();
     }
+    public boolean isEmpty() { return size() == 0; }
 
     public void addPerson(Person p) {
         people.add(p);
@@ -21,14 +22,23 @@ public class Group {
         return people;
     }
     public void extractPerson(int index) {
-        people.remove(index);
+        try {
+            people.remove(index);
+        } catch (IndexOutOfBoundsException ex) {
+
+        }
     }
 
     public Person pop() {
         Person tmp = new Person();
-        if(people.size() > 0) {
-            tmp = people.get(0);
-            people.remove(0);
+        try {
+            if (people.size() > 0) {
+                tmp = people.get(0);
+                people.remove(0);
+            } else
+                throw new NullPointerException("Error, list is empty");
+        } catch (NullPointerException ex) {
+            return null;
         }
             return tmp;
     }
