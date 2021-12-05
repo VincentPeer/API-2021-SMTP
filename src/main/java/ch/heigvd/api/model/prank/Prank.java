@@ -1,12 +1,11 @@
 package ch.heigvd.api.model.prank;
 
-import ch.heigvd.api.model.mail.Group;
-import ch.heigvd.api.model.mail.Mail;
 import ch.heigvd.api.smtp.SmtpClient;
-
 import java.io.*;
-import java.util.List;
 
+/**
+ * Cette classe crée un ou plusieurs prank(s)
+ */
 public class Prank {
     SmtpClient client;
     PrankGenerator prank = new PrankGenerator();

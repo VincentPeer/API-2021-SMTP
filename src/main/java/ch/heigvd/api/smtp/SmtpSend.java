@@ -17,55 +17,58 @@ public class SmtpSend {
     static final Logger LOG = Logger.getLogger(SmtpClient.class.getName());
 
     /**
-     *
+     * Envoit un mail à un ou plusieurs destinataires, le mail doit être complet pour un bon fonctionnement.
      * @param in Flux d'entrée pour la réception des messages venant du serveur
      * @param out Flux de sorties pour l'envoie d'information au sereur
      * @param mail Le mail à envoyer
      * @throws IOException En cas d'erreur de lecture/écriture sur un flux, une exception est levée
      */
     void send(BufferedReader in, BufferedWriter out, Mail mail) throws IOException {
-        final String EOL = "\r\n";
+        final String EOL = "\r\n"; // Fin de ligne
+        final String ERREUR = "Erreur de communication avec le serveur";
 
-        LOG.log(Level.INFO, in.readLine()); // Lit le message de bienvenue du serveur
+        LOG.log(Level.INFO, in.readLine()); // Lecture du message de bienvenue du serveur
         out.write("EHLO mock" + EOL);
         out.flush();
 
         LOG.log(Level.INFO, "*** Response sent by the server: ***");
         String line = in.readLine();
-        while ((line.startsWith("250-"))) {
+        while((line.startsWith("250-"))) {
             LOG.log(Level.INFO, line);
             line = in.readLine();
         }
 
+        // Informe l'expéditeur du mail
         out.write("MAIL FROM:" + mail.getSender().getEmail() + EOL);
         out.flush();
 
         if(!in.readLine().endsWith("Ok"))
-            throw new IOException("Erreur de lecture");
+            throw new IOException(ERREUR);
 
+        // Informe les destinataires du mail
         for(int i = 0; i < mail.getReceivers().size(); ++i) {
             out.write("RCPT TO:" + mail.getReceivers().get(i).getEmail() + EOL);
             out.flush();
 
-            line = in.readLine();
-            if(!line.endsWith("Ok"))
-                throw new IOException("Erreur de lecture");
+            if(!in.readLine().endsWith("Ok"))
+                throw new IOException(ERREUR);
         }
 
+        // Informe de la saisie à venir du corps du message
         out.write("DATA" + EOL);
         out.flush();
 
-        line = in.readLine();
-        if(!line.startsWith("354"))
-            throw new IOException("Erreur de lecture");
+        if(!in.readLine().startsWith("354"))
+            throw new IOException(ERREUR);
 
+        // Envoie du corps du message
         out.write(mail.getText() + EOL + "." + EOL);
         out.flush();
 
-        line = in.readLine();
-        if(!line.endsWith("Ok"))
-            throw new IOException("Erreur de lecture");
+        if(!in.readLine().endsWith("Ok"))
+            throw new IOException(ERREUR);
 
+        // Fin de la communication avec le serveur
         out.write("QUIT" + EOL);
         out.flush();
 

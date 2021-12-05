@@ -1,5 +1,9 @@
 package ch.heigvd.api.model.prank;
 
+/**
+ * Configuration des pranks, à savoir le nombre de groupe et les fichiers concernants les victimes et les pranks à
+ * envoyer.
+ */
 public class PrankConfig {
 
     private int NB_GROUPE;
@@ -12,7 +16,6 @@ public class PrankConfig {
         FILE_MESSGAGES_PATH = messageFilename;
     }
 
-    // todo setter utile?
     public void setNbGroupe(int n) {
         NB_GROUPE = n;
     }
@@ -36,6 +39,5 @@ public class PrankConfig {
     public String getMessageFilename() {
     return FILE_MESSGAGES_PATH;
     }
-
 
 }

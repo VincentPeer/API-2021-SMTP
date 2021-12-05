@@ -3,6 +3,9 @@ package ch.heigvd.api.model.mail;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Crée un groupe de Person en utilisant une ArrayList.
+ */
 public class Group {
     private final List<Person> people;
 
@@ -25,10 +28,15 @@ public class Group {
         try {
             people.remove(index);
         } catch (IndexOutOfBoundsException ex) {
-
+            System.out.println(ex + " : Extract index is out of pepole list");
         }
     }
 
+    /**
+     * Supprime la première personne du groupe
+     * @return La personne qui vient d'être retirée du groupe
+     * @NullPointerException Exception levée si on veut pop un groupe vide
+     */
     public Person pop() {
         Person tmp = new Person();
         try {
@@ -36,9 +44,9 @@ public class Group {
                 tmp = people.get(0);
                 people.remove(0);
             } else
-                throw new NullPointerException("Error, list is empty");
+                throw new NullPointerException("Can not pop a Person from empty Group");
         } catch (NullPointerException ex) {
-            return null;
+            System.out.println(ex);
         }
             return tmp;
     }

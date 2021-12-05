@@ -11,8 +11,13 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A partir des informations de la classe PrankConfig, la classe PrankGenerator crée les différents groupes
+ * parmi lesquels on trouvera un expéditeur et des destinataires. Les mails sont également généré et chque groupe
+ * aura un mail correspondant, avec un prank attribué.
+ */
 public class PrankGenerator {
-    private Group victimsList = new Group();;
+    private Group victimsList = new Group();
     private List<Group> groups;
     private List<Mail> mails;
     private List<String> messages = new ArrayList<>();
@@ -22,6 +27,12 @@ public class PrankGenerator {
         return groups;
     }
 
+    /**
+     * Génère les groupes selon la liste de victime et le nombre de groupe à former
+     * @param nbGroup Nombre de groupe différent à former
+     * @param victimsStream Flux menant au fichier comportant la liste des emails des victimes
+     * @throws IOException En cas d'erreur de lecture/écriture dans un fichier, une erreur est levée.
+     */
     public void makeGroups(int nbGroup, InputStream victimsStream) throws IOException {
         groups = new ArrayList<>(nbGroup);
         BufferedReader br = new BufferedReader(new InputStreamReader(victimsStream, "UTF-8"));

@@ -4,6 +4,8 @@
 //import java.io.IOException;
 //import java.io.InputStream;
 
+import ch.heigvd.api.model.mail.Group;
+import ch.heigvd.api.model.mail.Person;
 import ch.heigvd.api.model.prank.Prank;
 import ch.heigvd.api.model.prank.PrankConfig;
 
@@ -12,14 +14,20 @@ import java.io.IOException;
 public class Main {
 
     public static void main(String ... args) throws IOException {
-        final int NB_GROUPE = 3;
-        final String FILE_VICTIMS_PATH =  "config/victims";
-        final String FILE_MESSGAGE_PATH =  "config/messages";
 
-        PrankConfig prankConfig = new PrankConfig(NB_GROUPE, FILE_VICTIMS_PATH, FILE_MESSGAGE_PATH);
-        Prank prank = new Prank(prankConfig);
+        Group g1 = new Group();
+        g1.addPerson(new Person("v"));
+        g1.pop();
+        g1.pop();
 
-        prank.makePrank();
+//        final int NB_GROUPE = 3;
+//        final String FILE_VICTIMS_PATH =  "config/victims";
+//        final String FILE_MESSGAGE_PATH =  "config/messages";
+//
+//        PrankConfig prankConfig = new PrankConfig(NB_GROUPE, FILE_VICTIMS_PATH, FILE_MESSGAGE_PATH);
+//        Prank prank = new Prank(prankConfig);
+//
+//        prank.makePrank();
 
     }
 }

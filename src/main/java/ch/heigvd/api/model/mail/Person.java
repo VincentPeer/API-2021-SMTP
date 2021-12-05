@@ -1,7 +1,10 @@
 package ch.heigvd.api.model.mail;
 
+/**
+ * Défini une personne avec son prénom, son nom et son email
+ */
 public class Person {
-    private String email;
+    private String firstname, lastname, email;
 
     public Person(String email) {
         this.email = email;
@@ -14,5 +17,4 @@ public class Person {
     }
 
     public void setEmail(String email) { this.email = email; }
-
 }
