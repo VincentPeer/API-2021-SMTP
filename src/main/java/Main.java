@@ -15,19 +15,14 @@ public class Main {
 
     public static void main(String ... args) throws IOException {
 
-        Group g1 = new Group();
-        g1.addPerson(new Person("v"));
-        g1.pop();
-        g1.pop();
+        final int NB_GROUPE = 3;
+        final String FILE_VICTIMS_PATH =  "config/victims";
+        final String FILE_MESSGAGE_PATH =  "config/messages";
 
-//        final int NB_GROUPE = 3;
-//        final String FILE_VICTIMS_PATH =  "config/victims";
-//        final String FILE_MESSGAGE_PATH =  "config/messages";
-//
-//        PrankConfig prankConfig = new PrankConfig(NB_GROUPE, FILE_VICTIMS_PATH, FILE_MESSGAGE_PATH);
-//        Prank prank = new Prank(prankConfig);
-//
-//        prank.makePrank();
+        PrankConfig prankConfig = new PrankConfig(NB_GROUPE, FILE_VICTIMS_PATH, FILE_MESSGAGE_PATH);
+        Prank prank = new Prank(prankConfig);
+
+        prank.makePrank();
 
     }
 }

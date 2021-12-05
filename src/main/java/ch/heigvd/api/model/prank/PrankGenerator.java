@@ -21,6 +21,8 @@ public class PrankGenerator {
     private List<Group> groups;
     private List<Mail> mails;
     private List<String> messages = new ArrayList<>();
+    private final int GROUP_MIN_SIZE = 3;
+    private final String END_OF_MESSAGE = "END_OF_MESSAGE";
 
     public List<Mail> getMails () { return mails; }
     public List<Group> getGroups() {
@@ -31,9 +33,10 @@ public class PrankGenerator {
      * Génère les groupes selon la liste de victime et le nombre de groupe à former
      * @param nbGroup Nombre de groupe différent à former
      * @param victimsStream Flux menant au fichier comportant la liste des emails des victimes
-     * @throws IOException En cas d'erreur de lecture/écriture dans un fichier, une erreur est levée.
+     * @return True si la création s'est bien passée, false sinon
+     * @throws IOException En cas d'erreur de lecture/écriture dans un fichier, une erreur est levée
      */
-    public void makeGroups(int nbGroup, InputStream victimsStream) throws IOException {
+    public boolean makeGroups(int nbGroup, InputStream victimsStream) throws IOException {
         groups = new ArrayList<>(nbGroup);
         BufferedReader br = new BufferedReader(new InputStreamReader(victimsStream, "UTF-8"));
 
@@ -43,18 +46,30 @@ public class PrankGenerator {
             Person p = new Person(email);
             victimsList.addPerson(p);
         }
+        // Vérification que le nombre d'email est suffisant pour le nombre de groupe
+        if(victimsList.size() < GROUP_MIN_SIZE * nbGroup) {
+            System.out.println("Error, email list isn't long enough to make " + nbGroup + " groups");
+            return false;
+        }
+
         for(int j = 0; j < nbGroup; ++j)
             groups.add(new Group());
 
-        // Rempli les groupes
+        // Rempli les groupes depuis la liste de victime
         while(!victimsList.isEmpty()) { // todo le dernier groupe aura une taille spéciale + gérer nb personne dans  la liste (min 3 par groupe)
             for(int j = 0; j < nbGroup; ++j) {
                 if(!victimsList.isEmpty()) // todo 2x la meme condition...
                     groups.get(j).addPerson(victimsList.pop());
             }
         }
+        return true;
     }
 
+    /**
+     * Génère un mail propre à chaque groupe
+     * @param mess Flux menant au fichier contenant la liste des emails
+     * @throws IOException En cas d'erreur de lecture, une erreur est levée
+     */
     public void makeMails(InputStream mess) throws IOException { // todo les check si assez de message etc
         readMessages(mess);
         mails = new ArrayList<>(groups.size());
@@ -73,13 +88,20 @@ public class PrankGenerator {
         }
     }
 
+    /**
+     * Lecture des messages qui deviendront le corps du mail. Le fichier contenant les messages doit contenir pour
+     * chaque fin de message une ligne précise qui annonce la fin d'un message. Cette ligne doit correspondre à la
+     * constante END_OF_MESSAGE déclarée comme attribut de cette classe.
+     * @param is Flux menant au fichier contenant la liste des emails
+     * @throws IOException En cas d'erreur de lecture, une erreur est levée
+     */
     private void readMessages(InputStream is) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
 
         StringBuilder message = new StringBuilder();
         String line = "";
         while((line = br.readLine()) != null) {
-            while (!line.equals("END_OF_MESSAGE")) {
+            while (!line.equals(END_OF_MESSAGE)) {
                 message.append(line);
                 line = br.readLine();
             }
