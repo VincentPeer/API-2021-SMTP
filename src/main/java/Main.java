@@ -22,7 +22,9 @@ public class Main {
         PrankConfig prankConfig = new PrankConfig(NB_GROUPE, FILE_VICTIMS_PATH, FILE_MESSGAGE_PATH);
         Prank prank = new Prank(prankConfig);
 
-        prank.makePrank();
+         if(!prank.makePrank())
+             System.out.println("Error to make the prank");
+
 
     }
 }

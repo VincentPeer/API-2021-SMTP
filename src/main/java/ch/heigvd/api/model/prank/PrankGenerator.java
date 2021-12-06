@@ -101,11 +101,12 @@ public class PrankGenerator {
         StringBuilder message = new StringBuilder();
         String line = "";
         while((line = br.readLine()) != null) {
-            while (!line.equals(END_OF_MESSAGE)) {
+            while (!line.startsWith(END_OF_MESSAGE)) {
                 message.append(line);
                 line = br.readLine();
             }
             messages.add(message.toString());
+            message = new StringBuilder();
         }
     }
 }

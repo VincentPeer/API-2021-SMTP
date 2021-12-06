@@ -61,6 +61,17 @@ public class SmtpSend {
         if(!in.readLine().startsWith("354"))
             throw new IOException(ERREUR);
 
+        // Informe les destinataires du mail
+        StringBuilder recipients = new StringBuilder("TO: ");
+        for(int i = 0; i < mail.getReceivers().size(); ++i)
+            recipients.append(mail.getReceivers().get(i).getEmail() + (i != mail.getReceivers().size() - 1 ? "," : ""));
+
+        out.write(recipients.toString() + EOL);
+        out.flush();
+
+        out.write(EOL);
+        out.flush();
+
         // Envoie du corps du message
         out.write(mail.getText() + EOL + "." + EOL);
         out.flush();
