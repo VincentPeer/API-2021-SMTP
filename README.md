@@ -9,10 +9,12 @@ Your report MUST include the following sections:
 
 * **A description of your implementation**: document the key aspects of your code. It is probably a good idea to start with a class diagram. Decide which classes you want to show (focus on the important ones) and describe their responsibilities in text. It is also certainly a good idea to include examples of dialogues between your client and an SMTP server (maybe you also want to include some screenshots here).
 
-### Introduction
+## Introduction
 
 Ce projet a pour but de nous familiariser avec le protocole SMTP en envoyant 
 des emails contenant des plaisanteries. 
+
+## Présentation du projet
 
 #### Package model
 Ce package contient 2 sous packages qui sont le mail et le prank, leur union permet
@@ -56,6 +58,7 @@ La classe SmtpClient établit une connexion avec un serveur SMTP, elle utilise u
 a pour but d'envoyer le mail. De cette façon, la connexion serveur et l'envoie du message ainsi que le communication sont 
 séparées. 
 SmtpSend possède donc une fonction send qui prend en paramètre les flux d'entrées/sorties pour communiquer avec le serveur
-et un mail à envoyer. C'est dans cette fonction que le protocole SMTP est utlisé pour le dialogue avec le serveur
+et un mail à envoyer. C'est dans cette fonction que le protocole SMTP est utlisé pour le dialogue avec le serveur. 
+
 
 
