@@ -30,7 +30,9 @@ public class PrankGenerator {
     }
 
     /**
-     * Génère les groupes selon la liste de victime et le nombre de groupe à former
+     * Génère les groupes selon la liste de victime et le nombre de groupe à former.
+     * Le nombre d'adresses mail fourni doit être suffisant pour que chaque groupe puisse être composé de 3 personnes
+     * au minimum.
      * @param nbGroup Nombre de groupe différent à former
      * @param victimsStream Flux menant au fichier comportant la liste des emails des victimes
      * @return True si la création s'est bien passée, false sinon
@@ -52,13 +54,14 @@ public class PrankGenerator {
             return false;
         }
 
+        // Initialisation des groupes
         for(int j = 0; j < nbGroup; ++j)
             groups.add(new Group());
 
         // Rempli les groupes depuis la liste de victime
-        while(!victimsList.isEmpty()) { // todo le dernier groupe aura une taille spéciale + gérer nb personne dans  la liste (min 3 par groupe)
+        while(!victimsList.isEmpty()) {
             for(int j = 0; j < nbGroup; ++j) {
-                if(!victimsList.isEmpty()) // todo 2x la meme condition...
+                if(!victimsList.isEmpty())
                     groups.get(j).addPerson(victimsList.pop());
             }
         }
@@ -73,6 +76,8 @@ public class PrankGenerator {
     public void makeMails(InputStream mess) throws IOException { // todo les check si assez de message etc
         readMessages(mess);
         mails = new ArrayList<>(groups.size());
+
+        //Initialisation des mails
         for(int j = 0; j < groups.size(); ++j)
             mails.add(new Mail());
 
