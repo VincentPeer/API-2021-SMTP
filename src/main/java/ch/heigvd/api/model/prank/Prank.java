@@ -12,8 +12,9 @@ public class Prank {
     PrankGenerator prank = new PrankGenerator();
     PrankConfig prankConfig;
 
-    public Prank(PrankConfig prankConfig) {
+    public Prank(PrankConfig prankConfig, String addr, String port) {
         this.prankConfig = prankConfig;
+        this.client = new SmtpClient(addr, port);
     }
 
     /**
@@ -27,7 +28,6 @@ public class Prank {
         prank.makeMails(new FileInputStream(prankConfig.getMessageFilename()));
 
         for(int i = 0 ; i < prankConfig.getNbGroupe(); ++i) {
-            client  = new SmtpClient("localhost", "25");
             client.sendMail(prank.getMails().get(i));
         }
         return true;
