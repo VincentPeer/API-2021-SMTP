@@ -39,6 +39,23 @@ les noms de fichier à lire pour les listes d'email et de plaisantiries. Le nomb
 est égalmenet stocké ici. Des setteur/getteur sont disponibles pour configurer ce type 
 d'information.
 
-La classe PrankGenerator met en oeuvre tout l'algorithme qui écrit un mail dans sa totalité en 
-préparant chaque attribut avec des valeurs qu'il détermine lui-même en lisant
-les fichiers fournis. Il crée également les groupes de personnes qui feront parties d'un prank.
+La classe PrankGenerator met en oeuvre tout l'algorithme qui écrit un mail.
+Il crée également les groupes de personnes qui feront parties d'un prank.
+Les premières étapes de cette classe consistent à lire les fichiers et en retirer les 
+emails ainsi que les prank qui seront envoyés. A partir de ces informations, le nombre de groupe
+demandé est crée à partir de la liste des adresses mail. Chaque mail se voit attribué 
+un message qui a été lu dans un fichier également.
+
+La Classe Prank utilise PrankGenerator afin de créer les mails qui seront prêt à l'envoie et dont 
+la configuration à été tirée d'une instance de PrankConfig. Cette classe possède également une instance
+de SmtpClient qui permet de lier les mails à un serveur SMTP puis finalement de pouvoir envoyer
+les mails créés.
+
+#### Package smtp
+La classe SmtpClient établit une connexion avec un serveur SMTP, elle utilise une deuxième classe SmtpSend qui
+a pour but d'envoyer le mail. De cette façon, la connexion serveur et l'envoie du message ainsi que le communication sont 
+séparées. 
+SmtpSend possède donc une fonction send qui prend en paramètre les flux d'entrées/sorties pour communiquer avec le serveur
+et un mail à envoyer. C'est dans cette fonction que le protocole SMTP est utlisé pour le dialogue avec le serveur
+
+
