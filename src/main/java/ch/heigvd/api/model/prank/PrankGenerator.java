@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  * A partir des informations de la classe PrankConfig, la classe PrankGenerator crée les différents groupes
- * parmi lesquels on trouvera un expéditeur et des destinataires. Les mails sont également généré et chque groupe
+ * dans lesquels on trouvera un expéditeur et des destinataires. Les mails sont également généré et chque groupe
  * aura un mail correspondant, avec un prank attribué.
  */
 public class PrankGenerator {

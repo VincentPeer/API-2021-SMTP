@@ -31,13 +31,13 @@ une personne, de vérifier si un groupe est vide ou non, et d'autres encore.
 Cette classe sera particulièrement utile pour crée les groupes formant un mail, à 
 savoir l'émetteur et les récepteurs.
 
-La classe Mail possède tous les champs nécesssaire pour créer un mail dans sa totalité. 
-pour chadun de ces champs, il existe un getteur et un setteur pour pouvoir accéder ou modifier
+La classe Mail possède tous les attributs nécesssaire pour créer un mail dans sa totalité. 
+pour chacun de ces attributs, il existe un getteur et un setteur pour pouvoir accéder ou modifier
 les information du mail.
 
 #### Package prank
 La classe PrankConfig stocke les informations qui permettent la création de mail en spécifiant
-les noms de fichier à lire pour les listes d'email et de plaisantiries. Le nombre de groupe
+les noms de fichier à lire pour les listes d'email et de plaisantries. Le nombre de groupe
 est égalmenet stocké ici. Des setteur/getteur sont disponibles pour configurer ce type 
 d'information.
 
