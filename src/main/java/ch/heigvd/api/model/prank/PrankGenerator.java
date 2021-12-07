@@ -13,16 +13,16 @@ import java.util.List;
 
 /**
  * A partir des informations de la classe PrankConfig, la classe PrankGenerator crée les différents groupes
- * dans lesquels on trouvera un expéditeur et des destinataires. Les mails sont également généré et chque groupe
+ * dans lesquels on trouvera un expéditeur et des destinataires. Les mails sont également généré et chaque groupe
  * aura un mail correspondant, avec un prank attribué.
  */
 public class PrankGenerator {
-    private Group victimsList = new Group();
+    private final Group victimsList = new Group();
     private List<Group> groups;
     private List<Mail> mails;
-    private List<String> messages = new ArrayList<>();
-    private final int GROUP_MIN_SIZE = 3;
-    private final String END_OF_MESSAGE = "END_OF_MESSAGE";
+    private final List<String> messages = new ArrayList<>();
+    static private final int GROUP_MIN_SIZE = 3;
+    static private final String END_OF_MESSAGE = "END_OF_MESSAGE";
 
     public List<Mail> getMails () { return mails; }
     public List<Group> getGroups() {

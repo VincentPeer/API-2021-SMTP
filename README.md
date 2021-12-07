@@ -41,11 +41,11 @@ les noms de fichier à lire pour les listes d'email et de plaisantries. Le nombr
 est égalmenet stocké ici. Des setteur/getteur sont disponibles pour configurer ce type 
 d'information.
 
-La classe PrankGenerator met en oeuvre tout l'algorithme qui écrit un mail.
+La classe PrankGenerator met en oeuvre tout l'algorithme qui génère un mail.
 Il crée également les groupes de personnes qui feront parties d'un prank.
 Les premières étapes de cette classe consistent à lire les fichiers et en retirer les 
-emails ainsi que les prank qui seront envoyés. A partir de ces informations, le nombre de groupe
-demandé est crée à partir de la liste des adresses mail. Chaque mail se voit attribué 
+emails, les prank qui seront envoyés ainsi que le nombre de groupes
+demandé. Chaque mail se voit attribué 
 un message qui a été lu dans un fichier également.
 
 La Classe Prank utilise PrankGenerator afin de créer les mails qui seront prêt à l'envoie et dont 
