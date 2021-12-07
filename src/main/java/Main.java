@@ -13,7 +13,6 @@ import java.io.IOException;
 public class Main {
 
     public static void main(String ... args) throws IOException {
-
         final int NB_GROUPE             = 4;
         final String FILE_VICTIMS_PATH  =  "config/victims";
         final String FILE_MESSGAGE_PATH =  "config/messages";

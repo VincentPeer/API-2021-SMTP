@@ -9,7 +9,7 @@ import java.util.List;
  * Chaque attribut possède un getteur/setteur pour respectivement l'accès ou la modification de celui-ci.
  */
 public class Mail {
-    private Person sender = new Person();
+    private Person sender;
     private List<Person> receivers;
     private List<Person> cc;
     private String subject;

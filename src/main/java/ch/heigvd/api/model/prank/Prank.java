@@ -8,9 +8,9 @@ import java.io.*;
  * prescrite par la classe PrankConfig. Cette classe contient un client SMTP qui établira la connexion avec le serveur.
  */
 public class Prank {
-    SmtpClient client;
-    PrankGenerator prank = new PrankGenerator();
-    PrankConfig prankConfig;
+    private SmtpClient client;
+    private PrankGenerator prank = new PrankGenerator();
+    private PrankConfig prankConfig;
 
     public Prank(PrankConfig prankConfig, String addr, String port) {
         this.prankConfig = prankConfig;

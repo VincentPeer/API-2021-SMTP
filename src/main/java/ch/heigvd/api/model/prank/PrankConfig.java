@@ -5,7 +5,6 @@ package ch.heigvd.api.model.prank;
  * envoyer.
  */
 public class PrankConfig {
-
     private int NB_GROUPE;
     private String FILE_VICTIMS_PATH;
     private String FILE_MESSGAGES_PATH;
