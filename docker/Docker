@@ -4,5 +4,5 @@ EXPOSE 8282
 EXPOSE 25
 
 COPY MockMock/ /usr/src/MockMock
-WORKDIR /usr/src/mockmock
+WORKDIR /usr/src/MockMock
 CMD ["java", "-jar", "MockMock-1.4.0.one-jar.jar"]
