@@ -14,7 +14,7 @@ import ch.heigvd.api.model.mail.Mail;
  */
 public class SmtpSend {
 
-    static final Logger LOG = Logger.getLogger(SmtpClient.class.getName());
+    static final Logger LOG = Logger.getLogger(SmtpSend.class.getName());
 
     /**
      * Envoit un mail à un ou plusieurs destinataires, le mail doit être complet pour un bon fonctionnement.
@@ -42,7 +42,10 @@ public class SmtpSend {
         out.write("MAIL FROM:" + mail.getSender().getEmail() + EOL);
         out.flush();
 
-        if(!in.readLine().endsWith("Ok"))
+
+        line = in.readLine();
+        LOG.log(Level.INFO, line);
+        if(!line.endsWith("Ok"))
             throw new IOException(ERREUR);
 
         // Informe les destinataires du mail
@@ -50,7 +53,9 @@ public class SmtpSend {
             out.write("RCPT TO:" + mail.getReceivers().get(i).getEmail() + EOL);
             out.flush();
 
-            if(!in.readLine().endsWith("Ok"))
+            line = in.readLine();
+            LOG.log(Level.INFO, line);
+            if(!line.endsWith("Ok"))
                 throw new IOException(ERREUR);
         }
 
@@ -62,13 +67,15 @@ public class SmtpSend {
                         "Content-Transfer-Encoding: quoted-printable" + EOL);
         out.flush();
 
-        if(!in.readLine().startsWith("354"))
+        line = in.readLine();
+        LOG.log(Level.INFO, line);
+        if(!line.startsWith("354"))
             throw new IOException(ERREUR);
 
         // Informe les destinataires du mail
         StringBuilder recipients = new StringBuilder("TO: ");
         for(int i = 0; i < mail.getReceivers().size(); ++i)
-            recipients.append(mail.getReceivers().get(i).getEmail() + (i != mail.getReceivers().size() - 1 ? "," : ""));
+            recipients.append(mail.getReceivers().get(i).getEmail()).append(i != mail.getReceivers().size() - 1 ? "," : "");
 
         out.write("Subject: " + mail.getSubject() + EOL);
 
@@ -83,7 +90,9 @@ public class SmtpSend {
         out.write(mail.getText() + EOL + "." + EOL);
         out.flush();
 
-        if(!in.readLine().endsWith("Ok"))
+        line = in.readLine();
+        LOG.log(Level.INFO, line);
+        if(!line.endsWith("Ok"))
             throw new IOException(ERREUR);
 
         // Fin de la communication avec le serveur
