@@ -1,13 +1,5 @@
-//import ch.heigvd.api.smtp.GetConfig;
-//
-//import java.io.FileInputStream;
-//import java.io.IOException;
-//import java.io.InputStream;
-
 import ch.heigvd.api.model.prank.Prank;
 import ch.heigvd.api.model.prank.PrankConfig;
-import ch.heigvd.api.smtp.SmtpClient;
-
 import java.io.IOException;
 
 public class Main {
