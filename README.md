@@ -31,21 +31,21 @@ une personne, de vérifier si un groupe est vide ou non, et d'autres encore.
 Cette classe sera particulièrement utile pour crée les groupes formant un mail, à 
 savoir l'émetteur et les récepteurs.
 
-La classe Mail possède tous les champs nécesssaire pour créer un mail dans sa totalité. 
-pour chadun de ces champs, il existe un getteur et un setteur pour pouvoir accéder ou modifier
+La classe Mail possède tous les attributs nécesssaire pour créer un mail dans sa totalité. 
+pour chacun de ces attributs, il existe un getteur et un setteur pour pouvoir accéder ou modifier
 les information du mail.
 
 #### Package prank
 La classe PrankConfig stocke les informations qui permettent la création de mail en spécifiant
-les noms de fichier à lire pour les listes d'email et de plaisantiries. Le nombre de groupe
+les noms de fichier à lire pour les listes d'email et de plaisantries. Le nombre de groupe
 est égalmenet stocké ici. Des setteur/getteur sont disponibles pour configurer ce type 
 d'information.
 
-La classe PrankGenerator met en oeuvre tout l'algorithme qui écrit un mail.
+La classe PrankGenerator met en oeuvre tout l'algorithme qui génère un mail.
 Il crée également les groupes de personnes qui feront parties d'un prank.
 Les premières étapes de cette classe consistent à lire les fichiers et en retirer les 
-emails ainsi que les prank qui seront envoyés. A partir de ces informations, le nombre de groupe
-demandé est crée à partir de la liste des adresses mail. Chaque mail se voit attribué 
+emails, les prank qui seront envoyés ainsi que le nombre de groupes
+demandé. Chaque mail se voit attribué 
 un message qui a été lu dans un fichier également.
 
 La Classe Prank utilise PrankGenerator afin de créer les mails qui seront prêt à l'envoie et dont 
