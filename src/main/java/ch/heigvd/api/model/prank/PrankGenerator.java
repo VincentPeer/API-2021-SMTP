@@ -83,6 +83,9 @@ public class PrankGenerator {
             // Les autres personnes du groupe seront les récéptionnistes
             mails.get(i).setReceiver(groups.get(i).getPeople().subList(1, groups.get(i).size()));
 
+            // Donne comme sujet du mail, le numéro du prank correspondant
+            mails.get(i).setSubject("Prank " + (i + 1));
+
             // Pour chaque groupe, un message est attribué
             mails.get(i).setText(messages.get(i));
         }
@@ -102,7 +105,7 @@ public class PrankGenerator {
         String line = "";
         while((line = br.readLine()) != null) {
             while (!line.startsWith(END_OF_MESSAGE)) {
-                message.append(line);
+                message.append(line + "\r\n");
                 line = br.readLine();
             }
             messages.add(message.toString());

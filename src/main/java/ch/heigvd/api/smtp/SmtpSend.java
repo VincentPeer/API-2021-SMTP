@@ -56,6 +56,10 @@ public class SmtpSend {
 
         // Informe de la saisie à venir du corps du message
         out.write("DATA" + EOL);
+
+        // Précise le charset souhaité et l'encodage afin d'avoir la visibilité des caractères spéciaux
+        out.write(  "Content-Type: text/plain; charset=UTF-8" + EOL +
+                        "Content-Transfer-Encoding: quoted-printable" + EOL);
         out.flush();
 
         if(!in.readLine().startsWith("354"))
@@ -66,9 +70,12 @@ public class SmtpSend {
         for(int i = 0; i < mail.getReceivers().size(); ++i)
             recipients.append(mail.getReceivers().get(i).getEmail() + (i != mail.getReceivers().size() - 1 ? "," : ""));
 
-        out.write(recipients.toString() + EOL);
+        out.write("Subject: " + mail.getSubject() + EOL);
+
+        out.write(recipients + EOL);
         out.flush();
 
+        // Envoie d'une ligne qui sépare l'entête du corps du message
         out.write(EOL);
         out.flush();
 
