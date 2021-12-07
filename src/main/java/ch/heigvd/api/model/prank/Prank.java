@@ -8,9 +8,9 @@ import java.io.*;
  * prescrite par la classe PrankConfig. Cette classe contient un client SMTP qui établira la connexion avec le serveur.
  */
 public class Prank {
-    SmtpClient client;
-    PrankGenerator prank = new PrankGenerator();
-    PrankConfig prankConfig;
+    private final SmtpClient client;
+    private final PrankGenerator prankGenerator = new PrankGenerator();
+    private final PrankConfig prankConfig;
 
     public Prank(PrankConfig prankConfig, String addr, String port) {
         this.prankConfig = prankConfig;
@@ -23,12 +23,12 @@ public class Prank {
      * @throws IOException En cas d'erreur de lecture/écriture dans un fichier, une erreur est levée
      */
     public boolean makePrank() throws IOException {
-        if(!prank.makeGroups(prankConfig.getNbGroupe(), new FileInputStream(prankConfig.getVictimsFilename())))
+        if(!prankGenerator.makeGroups(prankConfig.getNbGroup(), new FileInputStream(prankConfig.getVictimFilePath())))
             return false;
-        prank.makeMails(new FileInputStream(prankConfig.getMessageFilename()));
+        prankGenerator.makeMails(new FileInputStream(prankConfig.getMessageFilePath()));
 
-        for(int i = 0 ; i < prankConfig.getNbGroupe(); ++i) {
-            client.sendMail(prank.getMails().get(i));
+        for(int i = 0; i < prankConfig.getNbGroup(); ++i) {
+            client.sendMail(prankGenerator.getMails().get(i));
         }
         return true;
     }

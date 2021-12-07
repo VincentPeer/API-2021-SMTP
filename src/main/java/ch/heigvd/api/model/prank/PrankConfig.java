@@ -6,38 +6,26 @@ package ch.heigvd.api.model.prank;
  */
 public class PrankConfig {
 
-    private int NB_GROUPE;
-    private String FILE_VICTIMS_PATH;
-    private String FILE_MESSGAGES_PATH;
+    private final int nbGroup;
+    private final String victimFilePath;
+    private final String messageFilePath;
 
-    public PrankConfig(int n, String victimsFilname, String messageFilename) {
-        NB_GROUPE = n;
-        FILE_VICTIMS_PATH = victimsFilname;
-        FILE_MESSGAGES_PATH = messageFilename;
+    public PrankConfig(int n, String victimFilePath, String messageFilePath) {
+        nbGroup = n;
+        this.victimFilePath = victimFilePath;
+        this.messageFilePath = messageFilePath;
     }
 
-    public void setNbGroupe(int n) {
-        NB_GROUPE = n;
+    public int getNbGroup() {
+        return nbGroup;
     }
 
-    public void setVictimsFilename(String filename) {
-        FILE_VICTIMS_PATH = filename;
+    public String getVictimFilePath() {
+        return victimFilePath;
     }
 
-    public void setMessageFilename(String filename) {
-        FILE_MESSGAGES_PATH = filename;
-    }
-
-    public int getNbGroupe() {
-        return NB_GROUPE;
-    }
-
-    public String getVictimsFilename() {
-        return FILE_VICTIMS_PATH;
-    }
-
-    public String getMessageFilename() {
-    return FILE_MESSGAGES_PATH;
+    public String getMessageFilePath() {
+    return messageFilePath;
     }
 
 }

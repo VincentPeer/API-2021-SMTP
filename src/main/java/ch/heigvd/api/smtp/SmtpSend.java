@@ -14,7 +14,7 @@ import ch.heigvd.api.model.mail.Mail;
  */
 public class SmtpSend {
 
-    static final Logger LOG = Logger.getLogger(SmtpClient.class.getName());
+    static final Logger log = Logger.getLogger(SmtpClient.class.getName());
 
     /**
      * Envoit un mail à un ou plusieurs destinataires, le mail doit être complet pour un bon fonctionnement.
@@ -27,14 +27,14 @@ public class SmtpSend {
         final String EOL = "\r\n"; // Fin de ligne
         final String ERREUR = "Erreur de communication avec le serveur";
 
-        LOG.log(Level.INFO, in.readLine()); // Lecture du message de bienvenue du serveur
+        log.log(Level.INFO, in.readLine()); // Lecture du message de bienvenue du serveur
         out.write("EHLO mock" + EOL);
         out.flush();
 
-        LOG.log(Level.INFO, "*** Response sent by the server: ***");
+        log.log(Level.INFO, "*** Response sent by the server: ***");
         String line = in.readLine();
         while((line.startsWith("250-"))) {
-            LOG.log(Level.INFO, line);
+            log.log(Level.INFO, line);
             line = in.readLine();
         }
 
@@ -90,7 +90,7 @@ public class SmtpSend {
         out.write("QUIT" + EOL);
         out.flush();
 
-        LOG.log(Level.INFO, in.readLine()); // Message de fin
+        log.log(Level.INFO, in.readLine()); // Message de fin
 
     }
 }
