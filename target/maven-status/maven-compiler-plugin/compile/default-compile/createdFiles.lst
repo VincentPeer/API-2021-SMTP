@@ -1,0 +1,12 @@
+ch\heigvd\api\config\IConfigurationManager.class
+ch\heigvd\api\model\prank\Prank.class
+ch\heigvd\api\model\prank\PrankConfig.class
+Main.class
+ch\heigvd\api\config\ConfigurationManager.class
+ch\heigvd\api\smtp\SmtpClient.class
+ch\heigvd\api\model\mail\Mail.class
+ch\heigvd\api\model\prank\PrankGenerator.class
+ch\heigvd\api\smtp\ISmtpClient.class
+ch\heigvd\api\model\mail\Group.class
+ch\heigvd\api\model\mail\Person.class
+ch\heigvd\api\smtp\SmtpSend.class
