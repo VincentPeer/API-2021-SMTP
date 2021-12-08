@@ -79,4 +79,7 @@ mais chaque blague dois se terminer avec le mot clés "END_OF_MESSAGE".
 - Modifier les variables suivantes dans la classe Main :
 - ![alt text](picture/main.PNG)
 
+Une fois ces étapes effectuées, exécutez le programme puis rendez-vous sur
+http://localhost:8282 afin de voir le résultat qui contient les mails envoyés.
+
 Des fichiers exemples pour les victimes et emails vous sont fournis dans le dossier config.
