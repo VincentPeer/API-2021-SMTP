@@ -73,8 +73,8 @@ public class PrankGenerator {
      * @param emailStream Flux menant au fichier contenant la liste des emails
      * @throws IOException En cas d'erreur de lecture, une erreur est levée
      */
-    public void makeMails(InputStream emailStream) throws IOException { // todo les check si assez de message etc
-        readMessages(emailStream);
+    public void makeMails(InputStream emailStream) throws IOException {
+        readMessages(emailStream); // Génère la liste des messages à envoyer
         mails = new ArrayList<>(groups.size());
 
         //Initialisation des mails
@@ -92,8 +92,9 @@ public class PrankGenerator {
             mails.get(i).setSubject("Prank " + (i + 1));
 
             // Pour chaque groupe, un message est attribué
-            mails.get(i).setText(messages.get(i));
+            mails.get(i).setText(messages.get(i % messages.size()));
         }
+
     }
 
     /**
