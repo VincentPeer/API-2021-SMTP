@@ -64,11 +64,11 @@ l'exécution de mockmock, effetcuer les commandes suivantes:
 docker build -t vincentpeer/mockmock .
 
 
-####Lancement du container
+#### Lancement du container
 
 docker run -d --rm --name mockmock -p 25:25 -p 8282:8282 vincentpeer/mockmock
 
-####Arret du container
+#### Arret du container
 
 docker stop mockmock
 
