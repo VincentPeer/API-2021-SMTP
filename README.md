@@ -72,6 +72,8 @@ docker run -d --rm --name mockmock -p 25:25 -p 8282:8282 vincentpeer/mockmock
 
 docker stop mockmock
 
+### Instruction pour l'utilistion pour envoyer les mails
+
 Pour envoyer des blagues a vos amis, suivez les 3 etapes suivante : 
 - Créé un fichier contenant la listes des adresses emails de vos victimes. Une adresse email par ligne.
 - Créé un fichier contenant la liste de vos blagues à envoyer. Il est possible d'écrire sur plusieurs lignes,
