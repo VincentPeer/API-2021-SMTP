@@ -14,7 +14,7 @@ import ch.heigvd.api.model.mail.Mail;
  */
 public class SmtpSend {
 
-    static final Logger log = Logger.getLogger(SmtpClient.class.getName());
+    static final Logger LOG = Logger.getLogger(SmtpSend.class.getName());
 
     /**
      * Envoit un mail à un ou plusieurs destinataires, le mail doit être complet pour un bon fonctionnement.
@@ -27,14 +27,14 @@ public class SmtpSend {
         final String EOL = "\r\n"; // Fin de ligne
         final String ERREUR = "Erreur de communication avec le serveur";
 
-        log.log(Level.INFO, in.readLine()); // Lecture du message de bienvenue du serveur
+        LOG.log(Level.INFO, in.readLine()); // Lecture du message de bienvenue du serveur
         out.write("EHLO mock" + EOL);
         out.flush();
 
-        log.log(Level.INFO, "*** Response sent by the server: ***");
+        LOG.log(Level.INFO, "*** Response sent by the server: ***");
         String line = in.readLine();
         while((line.startsWith("250-"))) {
-            log.log(Level.INFO, line);
+            LOG.log(Level.INFO, line);
             line = in.readLine();
         }
 
@@ -65,6 +65,9 @@ public class SmtpSend {
         if(!in.readLine().startsWith("354"))
             throw new IOException(ERREUR);
 
+        // Informe le mail de qui est l'émetteur
+        out.write("FROM: " + mail.getSender().getEmail() + EOL);
+
         // Informe les destinataires du mail
         StringBuilder recipients = new StringBuilder("TO: ");
         for(int i = 0; i < mail.getReceivers().size(); ++i)
@@ -90,7 +93,7 @@ public class SmtpSend {
         out.write("QUIT" + EOL);
         out.flush();
 
-        log.log(Level.INFO, in.readLine()); // Message de fin
+        LOG.log(Level.INFO, in.readLine()); // Message de fin
 
     }
 }

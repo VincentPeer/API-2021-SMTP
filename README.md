@@ -52,20 +52,31 @@ et un mail à envoyer. C'est dans cette fonction que le protocole SMTP est utlis
 
 
 ### Diagram UML
-![](../SMTPuml.png)
+![alt text](picture/diagramme.PNG)
 
 ## Utilisation
+
+### Instruction pour l'utilistion de Docker
+Dans le dossier docker contenant le Dockerfile et le .jar permettant
+l'exécution de mockmock, effetcuer les commandes suivantes:
+#### Construction de l'image 
+
+docker build -t vincentpeer/mockmock .
+
+
+####Lancement du container
+
+docker run -d --rm --name mockmock -p 25:25 -p 8282:8282 vincentpeer/mockmock
+
+####Arret du container
+
+docker stop mockmock
 
 Pour envoyer des blagues a vos amis, suivez les 3 etapes suivante : 
 - Créé un fichier contenant la listes des adresses emails de vos victimes. Une adresse email par ligne.
 - Créé un fichier contenant la liste de vos blagues à envoyer. Il est possible d'écrire sur plusieurs lignes,
 mais chaque blague dois se terminer avec le mot clés "END_OF_MESSAGE".
 - Modifier les variables suivantes dans la classe Main :
-```java
-  final int    nbGroup         = 4;                 // min 3
-  final String victimsFilePath = "config/victims";  // Le fichier contenant vos victimes
-  final String jokesFilePath   = "config/messages"; // Le fichier contenat vos blagues
-  final String ADRESSE         = "localhost";       // L'addresse du servereur a utiliser
-  final String PORT            = "25";              // Le port du serveur
-```
+- ![alt text](picture/main.PNG)
+
 Des fichiers exemples pour les victimes et emails vous sont fournis dans le dossier config.

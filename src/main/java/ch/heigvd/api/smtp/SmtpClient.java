@@ -8,9 +8,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class SmtpClient implements ISmtpClient {
-    private final String addServeur;
-    private final String portServeur;
-    static final Logger log = Logger.getLogger(SmtpClient.class.getName());
+    private String addServeur;
+    private String portServeur;
+    static final Logger LOG = Logger.getLogger(SmtpClient.class.getName());
 
     public SmtpClient(String add, String port) {
         addServeur = add;
@@ -34,22 +34,22 @@ public class SmtpClient implements ISmtpClient {
             out.close();
             clientSocket.close();
         } catch (IOException ex) {
-            log.log(Level.SEVERE, ex.toString(), ex);
+            LOG.log(Level.SEVERE, ex.toString(), ex);
         } finally {
             try {
                 if (out != null) out.close();
             } catch (IOException ex) {
-                log.log(Level.SEVERE, ex.toString(), ex);
+                LOG.log(Level.SEVERE, ex.toString(), ex);
             }
             try {
                 if (in != null) in.close();
             } catch (IOException ex) {
-                log.log(Level.SEVERE, ex.toString(), ex);
+                LOG.log(Level.SEVERE, ex.toString(), ex);
             }
             try {
                 if (clientSocket != null && ! clientSocket.isClosed()) clientSocket.close();
             } catch (IOException ex) {
-                log.log(Level.SEVERE, ex.toString(), ex);
+                LOG.log(Level.SEVERE, ex.toString(), ex);
             }
         }
     }

@@ -17,12 +17,12 @@ import java.util.List;
  * aura un mail correspondant, avec un prank attribué.
  */
 public class PrankGenerator {
-    private final Group victimsList = new Group();
+    private Group victimsList = new Group();
     private List<Group> groups;
     private List<Mail> mails;
     private final List<String> messages = new ArrayList<>();
-    static private final int groupMinSize = 3;
-    static private final String emdOfMessage = "END_OF_MESSAGE";
+    static private final int GROUP_MIN_SIZE = 3;
+    static private final String END_OF_MESSAGE = "END_OF_MESSAGE";
 
     public List<Mail> getMails () { return mails; }
     public List<Group> getGroups() {
@@ -49,7 +49,7 @@ public class PrankGenerator {
             victimsList.addPerson(p);
         }
         // Vérification que le nombre d'email est suffisant pour le nombre de groupe
-        if(victimsList.size() < groupMinSize * nbGroup) {
+        if(victimsList.size() < GROUP_MIN_SIZE * nbGroup) {
             System.out.println("Error, email list isn't long enough to make " + nbGroup + " groups");
             return false;
         }
@@ -109,7 +109,7 @@ public class PrankGenerator {
         StringBuilder message = new StringBuilder();
         String line = "";
         while((line = br.readLine()) != null) {
-            while (!line.startsWith(emdOfMessage)) {
+            while (!line.startsWith(END_OF_MESSAGE)) {
                 message.append(line + "\r\n");
                 line = br.readLine();
             }
