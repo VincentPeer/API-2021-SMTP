@@ -5,14 +5,14 @@ import java.io.IOException;
 public class Main {
 
     public static void main(String ... args) throws IOException {
-        final int NB_GROUPE             = 4;
-        final String FILE_VICTIMS_PATH  =  "config/victims";
-        final String FILE_MESSGAGE_PATH =  "config/messages";
-        final String ADRESSE            =  "localhost";
-        final String PORT               =  "25";
+        final int nbGroup             = 4;                 // min 3
+        final String victimsFilePath  = "config/victims";  // Le fichier contenant vos victimes
+        final String jokesFilePath    = "config/messages"; // Le fichier contenat vos blagues
+        final String ADRESSE          = "localhost";       // L'addresse du servereur a utiliser
+        final String PORT             = "25";              // Le port du serveur
 
 
-        PrankConfig prankConfig = new PrankConfig(NB_GROUPE, FILE_VICTIMS_PATH, FILE_MESSGAGE_PATH);
+        PrankConfig prankConfig = new PrankConfig(nbGroup, victimsFilePath, jokesFilePath);
         Prank prank = new Prank(prankConfig, ADRESSE, PORT);
 
          if(!prank.makePrank())

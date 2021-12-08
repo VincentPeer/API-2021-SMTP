@@ -51,4 +51,21 @@ SmtpSend possède donc une fonction send qui prend en paramètre les flux d'entr
 et un mail à envoyer. C'est dans cette fonction que le protocole SMTP est utlisé pour le dialogue avec le serveur. 
 
 
+### Diagram UML
+![](../SMTPuml.png)
 
+## Utilisation
+
+Pour envoyer des blagues a vos amis, suivez les 3 etapes suivante : 
+- Créé un fichier contenant la listes des adresses emails de vos victimes. Une adresse email par ligne.
+- Créé un fichier contenant la liste de vos blagues à envoyer. Il est possible d'écrire sur plusieurs lignes,
+mais chaque blague dois se terminer avec le mot clés "END_OF_MESSAGE".
+- Modifier les variables suivantes dans la classe Main :
+```java
+  final int    nbGroup         = 4;                 // min 3
+  final String victimsFilePath = "config/victims";  // Le fichier contenant vos victimes
+  final String jokesFilePath   = "config/messages"; // Le fichier contenat vos blagues
+  final String ADRESSE         = "localhost";       // L'addresse du servereur a utiliser
+  final String PORT            = "25";              // Le port du serveur
+```
+Des fichiers exemples pour les victimes et emails vous sont fournis dans le dossier config.
